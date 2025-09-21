@@ -1,7 +1,7 @@
 {
   "name": "pgats-2025-02-base",
   "version": "1.0.0",
-  "description": "",
+  "description": "Se você é aluno da Pós-Graduação em Automação de Testes de Software (Turma 2), faça um fork desse repositório e boa sorte em seu trabalho de conclusão da disciplina.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,9 +20,14 @@
   "homepage": "https://github.com/juliodelimas/pgats-2025-02-base#readme",
   "dependencies": {
     "apollo-server-express": "^3.13.0",
+    "chai": "^6.0.1",
     "express": "^4.21.2",
     "graphql": "^16.11.0",
     "jsonwebtoken": "^9.0.2",
+    "mocha": "^11.7.2",
+    "node": "^24.8.0",
+    "sinon": "^21.0.0",
+    "supertest": "^7.1.4",
     "swagger-ui-express": "^5.0.1"
   }
 }
