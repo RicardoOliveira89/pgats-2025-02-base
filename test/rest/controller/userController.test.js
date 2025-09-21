@@ -55,6 +55,31 @@ describe('userController', () => {
                 });
                 expect(resposta.status).to.equal(200);
         });
+
+        it('Mock: Quando realizo o login com um usuário existente o retorno é 200', async () => {
+            const userServiceMock = sinon.stub(userService, 'authenticate');
+            userServiceMock.returns({
+                id: 2,
+                name: "joão",
+                email: "joao@email.com",
+                token: "token"
+            });
+
+            const resposta = await request(app)
+                .post('/api/users/login')
+                .send({
+                    email: "joao@email.com",
+                    password: "12345"
+                });
+
+            expect(resposta.status).to.equal(200);
+            expect(resposta.body).to.have.property('id', 2);
+            expect(resposta.body).to.have.property('name', "joão");
+            expect(resposta.body).to.have.property('email', "joao@email.com");
+            expect(resposta.body).to.have.property('token', "token");
+
+            sinon.restore();
+        });
     });
 
 });
