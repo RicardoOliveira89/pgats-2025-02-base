@@ -30,7 +30,7 @@ jobs:
     - name: Upload API
       env:
         PORT: 3000
-      run: npm start &
+      run: npm run start-rest &
 
     - name: Wait for the API to be working
       run: |
