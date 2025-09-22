@@ -28,10 +28,19 @@ jobs:
       run: npm run test-controller
 
     - name: Upload API
+      env:
+        PORT: 3000
       run: npm start & 
 
     - name: Wait for the API to be working
-      run: sleep 5
+      run: |
+        for i in {1..30}; do
+          nc -z localhost 3000 && exit 0
+          sleep 1
+        done
+        echo "API não está respondendo!" && exit 1
 
     - name: Run external tests
+      env:
+        API_URL: http://localhost:3000
       run: npm run test-external
