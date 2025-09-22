@@ -33,8 +33,8 @@ describe('userExternal', () => {
             const resposta = await request('http://localhost:3000')
                 .post('/api/users/login')
                 .send({
-                    email: "ricardo@email.com",
-                    password: "12345"
+                    email: "alice@email.com",
+                    password: "123456"
                 });
                 expect(resposta.status).to.equal(200);
         });
@@ -58,8 +58,8 @@ describe('userExternal', () => {
                 const respostaLogin = await request('http://localhost:3000')
                     .post('/api/users/login')
                     .send({
-                        email: 'ricardo@email.com',
-                        password: '12345'
+                        email: 'alice@email.com',
+                        password: '123456'
                     });
                 
                     const token = respostaLogin.body.token
@@ -79,7 +79,7 @@ describe('userExternal', () => {
                             paymentMethod: "credit_card",
                             cardData: {
                                 number: "123456789",
-                                name: "ricardo",
+                                name: "alice",
                                 expiry: "07/32",
                                 cvv: "777"
                             }
@@ -93,8 +93,8 @@ describe('userExternal', () => {
                 const respostaLogin = await request('http://localhost:3000')
                     .post('/api/users/login')
                     .send({
-                        email: 'ricardo@email.com',
-                        password: '12345'
+                        email: 'bob@email.com',
+                        password: '123456'
                     });
                 
                     const token = respostaLogin.body.token
