@@ -8,8 +8,8 @@ describe('userExternal', () => {
             const resposta = await request('http://localhost:3000')
                 .post('/api/users/register')
                 .send({
-                    name: "paulo",
-                    email: "paulo@email.com",
+                    name: "ricardo",
+                    email: "ricardo@email.com",
                     password: "12345"
                 });
                 expect(resposta.status).to.equal(201);
@@ -19,8 +19,8 @@ describe('userExternal', () => {
             const resposta = await request('http://localhost:3000')
                 .post('/api/users/register')
                 .send({
-                    name: "paulo",
-                    email: "paulo@email.com",
+                    name: "ricardo",
+                    email: "ricardo@email.com",
                     password: "12345"
                 });
                 expect(resposta.status).to.equal(400);
@@ -36,8 +36,7 @@ describe('userExternal', () => {
                     email: "ricardo@email.com",
                     password: "12345"
                 });
-                expect(resposta.status).to.equal(401);
-                expect(resposta.body).to.have.property('error', 'Credenciais inválidas');
+                expect(resposta.status).to.equal(200);
         });
 
         it('Quando realizo o login com usuário não cadastrado o retorno é 401', async () => {
@@ -52,35 +51,72 @@ describe('userExternal', () => {
         });
     });
 
-    /*
-describe('checkoutController', () => {
-    describe('POST /checkout', () => {
-        it.only('Quando informo produto = 1, quantidade = 1, frete = 10 e método de pagamento cartão de crédito devo receber status 200 e valor final 104.5', async () => {
-            const resposta = await request(app)
-                .post('/api/checkout')
-                .send(
-                    {
-                        "items": [
-                            {
-                            "productId": 1,
-                            "quantity": 1
+    
+    describe('checkoutExternal', () => {
+        describe('POST /checkout', () => {
+            it('Quando informo produto = 1, quantidade = 1, frete = 10 e método de pagamento cartão de crédito devo receber status 200 e valor final 104.5', async () => {
+                const respostaLogin = await request('http://localhost:3000')
+                    .post('/api/users/login')
+                    .send({
+                        email: 'ricardo@email.com',
+                        password: '12345'
+                    });
+                
+                    const token = respostaLogin.body.token
+
+                const resposta = await request('http://localhost:3000')
+                    .post('/api/checkout')
+                    .set('Authorization', `Bearer ${token}`)
+                    .send(
+                        {
+                            "items": [
+                                {
+                                "productId": 1,
+                                "quantity": 1
+                                }
+                            ],
+                            freight: 10,
+                            paymentMethod: "credit_card",
+                            cardData: {
+                                number: "123456789",
+                                name: "ricardo",
+                                expiry: "07/32",
+                                cvv: "777"
                             }
-                        ],
-                        freight: 10,
-                        paymentMethod: "credit_card",
-                        cardData: {
-                            number: "123456789",
-                            name: "ricardo",
-                            expiry: "07/32",
-                            cvv: "777"
                         }
-                    }
-                )
-                expect(resposta.status).to.equal(200);
-                expect(resposta.body).to.have.property('total', 104.5);
+                    )
+                    expect(resposta.status).to.equal(200);
+                    expect(resposta.body).to.have.property('total', 104.5);
+            });
+
+            it('Quando informo produto = 1, quantidade = 1, frete = 10 e método de pagamento boleto devo receber status 200 e valor final 110', async () => {
+                const respostaLogin = await request('http://localhost:3000')
+                    .post('/api/users/login')
+                    .send({
+                        email: 'ricardo@email.com',
+                        password: '12345'
+                    });
+                
+                    const token = respostaLogin.body.token
+
+                const resposta = await request('http://localhost:3000')
+                    .post('/api/checkout')
+                    .set('Authorization', `Bearer ${token}`)
+                    .send(
+                        {
+                            "items": [
+                                {
+                                "productId": 1,
+                                "quantity": 1
+                                }
+                            ],
+                            freight: 10,
+                            paymentMethod: "boleto"
+                        }
+                    )
+                    expect(resposta.status).to.equal(200);
+                    expect(resposta.body).to.have.property('total', 110);
+            });
         });
     });
-});
-
-*/
 });
