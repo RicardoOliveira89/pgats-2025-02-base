@@ -81,37 +81,4 @@ describe('userController', () => {
             sinon.restore();
         });
     });
-
 });
-
-/*
-describe('checkoutController', () => {
-    describe('POST /checkout', () => {
-        it.only('Quando informo produto = 1, quantidade = 1, frete = 10 e método de pagamento cartão de crédito devo receber status 200 e valor final 104.5', async () => {
-            const resposta = await request(app)
-                .post('/api/checkout')
-                .send(
-                    {
-                        "items": [
-                            {
-                            "productId": 1,
-                            "quantity": 1
-                            }
-                        ],
-                        freight: 10,
-                        paymentMethod: "credit_card",
-                        cardData: {
-                            number: "123456789",
-                            name: "ricardo",
-                            expiry: "07/32",
-                            cvv: "777"
-                        }
-                    }
-                )
-                expect(resposta.status).to.equal(200);
-                expect(resposta.body).to.have.property('total', 104.5);
-        });
-    });
-});
-
-*/

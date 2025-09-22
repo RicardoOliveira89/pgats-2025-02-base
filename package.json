@@ -4,7 +4,9 @@
   "description": "Se você é aluno da Pós-Graduação em Automação de Testes de Software (Turma 2), faça um fork desse repositório e boa sorte em seu trabalho de conclusão da disciplina.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/**/**/*.test.js --timeout 10000",
+    "test-external": "mocha test/rest/external/**/*.test.js --timeout 10000",
+    "test-controller": "mocha test/rest/controller/**/*.test.js --timeout 10000"
   },
   "repository": {
     "type": "git",
